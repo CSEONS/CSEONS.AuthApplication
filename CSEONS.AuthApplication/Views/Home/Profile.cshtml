@@ -1,0 +1,8 @@
+﻿@model ApplicationUser
+
+<img src="@Model?.ImagePhotoURL" />
+<form asp-controller="Home" asp-action="ChangeProfilePhoto" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploadedFile" />
+    <input type="submit" />
+</form>
+<div asp-validation-summary="All"></div>

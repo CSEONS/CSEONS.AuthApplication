@@ -1,0 +1,28 @@
+﻿@model List<ApplicationUser>
+
+<form asp-action="EditPoints" asp-controller="Home">
+    <ul>
+   @{
+        int i = 0;
+
+        foreach (var user in Model)
+        {
+            <li>
+                <label>@user.FirstName @user.LastName</label>
+                <label>@user.Points</label>
+                <select name="userChanges[@i].Operation">
+                    <option value="@UserPointChanges.PointOperations.Add">+</option>
+                    <option value="@UserPointChanges.PointOperations.Remove">-</option>
+                    <option value="@UserPointChanges.PointOperations.Assign">=</option>
+                </select>
+                <input name="userChanges[@i].Id" value="@user.Id" type="hidden">
+                <input type="number" name="userChanges[@i].Value" />
+            </li>
+
+            i++;
+        }
+    }
+    </ul>
+    <input type="submit" />
+    <div asp-validation-summary="All"></div>
+</form>

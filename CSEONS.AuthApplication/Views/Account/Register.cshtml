@@ -1,0 +1,49 @@
+﻿@model RegisterViewModel
+
+<form asp-action="Register" asp-controller="Account" asp-route-returnUrl="@ViewBag.returnUrl">
+    <ul>
+        <li><span>Login: </span><input asp-for="@Model.Login" /></li>
+        <li><span>FirstName: </span><input asp-for="@Model.FirstName" /></li>
+        <li><span>LastName: </span><input asp-for="@Model.LastName" /></li>
+        <li><span>SecondName: </span><input asp-for="@Model.SecondName" /></li>
+        <li><span>Group: </span><input asp-for="@Model.Group"/></li>
+        <li><span>Role: </span>
+            <select asp-for="@Model.Role">
+                @foreach (var value in Enum.GetValues(typeof(ApplicationUser.Roles)))
+                {
+                    <option value="@value">@value</option>
+                }
+            </select>
+        </li>
+        <li><span>Password: </span><input asp-for="@Model.Password" /></li>
+    </ul>
+    <input type="submit" value="Register"/>
+</form>
+
+<div asp-validation-summary="All"></div>
+<div>
+    @{
+        if (ViewBag.createUserErrors is not null)
+        {
+            foreach (var error in @ViewBag.createUserErrors)
+            {
+                <div>@error.Description</div>
+            }
+        }
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        var staticData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.list));
+
+        $("#groupInput").autocomplete({
+            source: staticData,
+            select: function (event, ui) {
+                $("#groupInput").val(ui.item.label);
+                $("#groupValues").val(ui.item.value);
+                return false;
+            },
+            minLength: 2
+        });
+    });
+</script>

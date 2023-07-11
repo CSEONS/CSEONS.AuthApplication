@@ -1,0 +1,27 @@
+﻿@model LoginViewModel
+<div>
+    <div>
+        <h1>Login</h1>
+        <form class="login-form" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
+            <div>
+                <label asp-for="@Model.Login"></label>
+                <input asp-for="@Model.Login" />
+                <span asp-validation-for="@Model.Login"></span>
+            </div>
+            <div>
+                <label asp-for="@Model.Password"></label>
+                <input asp-for="@Model.Password" />
+                <span asp-validation-for="@Model.Password"></span>
+            </div>
+            <div>
+                <label asp-for="@Model.RememberMe"></label>
+                <input asp-for="@Model.RememberMe" />
+                <span asp-validation-for="@Model.RememberMe"></span>
+            </div>
+            <div>
+                <input class="submit-button" type="submit" value="Войти" />
+            </div>
+            <div asp-validation-summary="All"></div>
+        </form>
+    </div>
+</div>
