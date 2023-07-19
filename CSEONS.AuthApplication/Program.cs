@@ -82,7 +82,6 @@ namespace CSEONS.AuthApplication
             app.UseStaticFiles();
 
             app.UseDeveloperExceptionPage();
-            app.UseExceptionHandler();
 
             app.UseRouting();
 
