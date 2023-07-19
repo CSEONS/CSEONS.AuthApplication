@@ -44,9 +44,10 @@ namespace CSEONS.AuthApplication.Controllers
 
                     var signinResult = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
 
-                    if (signinResult.Succeeded)
+                    if (!signinResult.Succeeded)
                     {
                         ModelState.AddModelError(nameof(LoginViewModel.Login), "Неверный логин или пароль");
+                        return View(model);
                     }
                 }
 

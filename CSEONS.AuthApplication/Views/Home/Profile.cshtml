@@ -4,5 +4,13 @@
 <form asp-controller="Home" asp-action="ChangeProfilePhoto" method="post" enctype="multipart/form-data">
     <input type="file" name="uploadedFile" />
     <input type="submit" />
+    <div asp-validation-summary="All"></div>
 </form>
-<div asp-validation-summary="All"></div>
+<form asp-controller="Home" asp-action="ChangePassword">
+    <label>Old pasword</label>
+    <input name="currentPassword" type="password" />
+    <label>New pasword</label>
+    <input name="newPassword" type="password" />
+    <input type="submit" />
+    <div asp-validation-summary="All"></div>
+</form>

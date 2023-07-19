@@ -174,5 +174,15 @@ namespace CSEONS.AuthApplication.Controllers
 
             return RedirectToAction(nameof(Profile), nameof(HomeController).CutController());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword)
+        {
+            var callerUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            var result = await _userManager.ChangePasswordAsync(callerUser, currentPassword, newPassword);
+
+            return RedirectToAction(nameof(Index), nameof(HomeController).CutController());
+        }
     }
 }
