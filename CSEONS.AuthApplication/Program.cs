@@ -8,10 +8,12 @@ using CSEONS.AuthApplication.Domain.Repositories.EntityFramework;
 using CSEONS.AuthApplication.Hubs;
 using CSEONS.AuthApplication.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 
 namespace CSEONS.AuthApplication
@@ -36,7 +38,8 @@ namespace CSEONS.AuthApplication
 
             builder.Services.AddDbContext<ApplicationDbContext>(config =>
             {
-                config.UseSqlServer(Config.ConnectionString);
+                config.UseMySql(Config.ConnectionString,
+                                new MySqlServerVersion("8.0"));
             });
 
             builder.Services.AddSingleton<IImageHandlerRepository>(x =>
@@ -48,7 +51,8 @@ namespace CSEONS.AuthApplication
                     ServiceURL = Config.ServiceURL
                 }), Config.BucketName);
             });
-            
+
+
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.User.AllowedUserNameCharacters = "àáâãäå¸æçèéêëìíîïğñòóôõö÷øùúûüışÿÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ _-.";
