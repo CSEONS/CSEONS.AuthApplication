@@ -12,7 +12,7 @@ namespace CSEONS.AuthApplication.Extensions
 
         public static string GetUserName(this ApplicationUser user)
         {
-            return $"{user.FirstName} {user.LastName} {user.SecondName}";
+            return $"{user.FirstName}{user.LastName}{user.SecondName}";
         }
 
         public static async Task CreateRoleAsync(this RoleManager<IdentityRole> roleManger, string name)
